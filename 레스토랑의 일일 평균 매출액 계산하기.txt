@@ -1,0 +1,8 @@
+WITH DaySum AS (
+  SELECT SUM(total_bill) AS total
+        , day
+  FROM tips
+  GROUP BY day
+)
+SELECT ROUND(AVG(total), 2) AS avg_sales
+FROM DaySum;
