@@ -1,0 +1,10 @@
+-- 당일 미세먼지 농도보다 다음날의 농도가 더 안좋은 날 찾기
+-- LEAD 함수 
+
+SELECT * 
+FROM (SELECT measured_at AS today
+        , LEAD(measured_at, 1) OVER(ORDER BY measured_at) AS next_day
+        , pm10
+        , LEAD(pm10, 1) OVER(ORDER BY measured_at) AS next_pm10
+      FROM measurements) AS A
+WHERE pm10 < next_pm10;

@@ -1,0 +1,10 @@
+-- 2018-01-01 이후 일일 매출 계산
+
+
+SELECT DATE(O.order_purchase_timestamp) AS dt
+      , ROUND(SUM(P.payment_value), 2) AS revenue_daily
+FROM olist_orders_dataset O
+JOIN olist_order_payments_dataset P ON O.order_id = P.order_id
+WHERE O.order_purchase_timestamp > '2018-01-01'
+GROUP BY DATE(O.order_purchase_timestamp)
+ORDER BY dt;
