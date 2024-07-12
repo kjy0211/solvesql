@@ -1,0 +1,7 @@
+-- MoMA에 등록되어 있고, 현재 살아있지 않은 작가 중 등록된 작품이 없는 작가 추출
+
+SELECT A.artist_id, A.name
+FROM artists A
+LEFT JOIN artworks_artists AA ON A.artist_id = AA.artist_id
+WHERE A.death_year IS NOT NULL
+  AND AA.artwork_id IS NULL;
