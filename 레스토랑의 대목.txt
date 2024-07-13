@@ -1,0 +1,10 @@
+-- 요일별 매출액 합계, 매출이 1500달러 이상인 요일의 결제 내역 모두 출력
+
+SELECT *
+FROM tips
+WHERE day IN (
+  SELECT day
+  FROM tips
+  GROUP BY day
+  HAVING SUM(total_bill) >= 1500
+) 
