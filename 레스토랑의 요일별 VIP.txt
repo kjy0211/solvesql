@@ -1,0 +1,6 @@
+-- 요일별로 가장 높은 금액의 결제 내역 출력
+
+SELECT *
+FROM tips
+GROUP BY day
+HAVING MAX(total_bill);
