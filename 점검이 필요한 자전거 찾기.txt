@@ -1,0 +1,8 @@
+-- 1달에 주행 거리가 50km 이상인 자전거가 점검 대상
+-- 2021년 1월 한 달간 50km 이상인 자전거 추출
+
+SELECT bike_id
+FROM rental_history
+WHERE return_at LIKE '2021-01%'
+GROUP BY bike_id
+HAVING SUM(distance) >= 50000;
