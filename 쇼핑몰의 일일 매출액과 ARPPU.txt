@@ -1,0 +1,12 @@
+-- 2018-01-01 이후 일별로 집계된 쇼핑몰의 결제 고객 수, 매출액, ARPPU 계산
+-- ARPPU : 결제 고객 1인 당 평균 결제 금액 (전체 매출액을 결제 고객 수로 나누기)
+
+SELECT DATE(O.order_purchase_timestamp) AS dt
+    , COUNT(DISTINCT O.order_id) AS pu
+    , ROUND(SUM(P.payment_value), 2) AS revenue_daily
+    , ROUND(SUM(P.payment_value)/COUNT(DISTINCT O.order_id), 2) AS arppu
+FROM olist_orders_dataset O
+JOIN olist_order_payments_dataset P ON O.order_id = P.order_id
+WHERE DATE(O.order_purchase_timestamp) >= '2018-01-01'
+GROUP BY DATE(O.order_purchase_timestamp)
+ORDER BY dt;
