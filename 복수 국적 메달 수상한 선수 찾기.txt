@@ -1,0 +1,12 @@
+-- 2000년 이후의 메달 수상 기록만 고려
+-- 메달을 수상한 선수 중 2개 이상의 국적으로 메달을 수상한 기록이 있는 선수
+
+SELECT A.name
+FROM records R
+JOIN athletes A ON R.athlete_id = A.id
+JOIN games G ON R.game_id = G.id
+WHERE G.year >= 2000
+  AND R.medal IS NOT NULL
+GROUP BY A.id
+HAVING COUNT(DISTINCT R.team_id) >= 2
+ORDER BY A.name;
