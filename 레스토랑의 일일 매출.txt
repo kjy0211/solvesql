@@ -1,0 +1,8 @@
+-- 요일별로 매출 총액 집계
+
+SELECT day
+    , SUM(total_bill) AS revenue_daily
+FROM tips
+GROUP BY day
+HAVING SUM(total_bill) >= 1000
+ORDER BY revenue_daily DESC;
