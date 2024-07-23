@@ -1,0 +1,9 @@
+-- 요일 별 결제 금액으로 top3 지불한 영수증 출력
+
+SELECT day, time, sex, total_bill
+FROM (
+    SELECT day, time, sex, total_bill,
+           DENSE_RANK() OVER (PARTITION BY day ORDER BY total_bill DESC) AS total_bill_rank
+    FROM tips
+) AS tbl_rank
+WHERE total_bill_rank <= 3;
